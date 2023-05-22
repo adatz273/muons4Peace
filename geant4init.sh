@@ -1,13 +1,9 @@
 #!/bin/bash
 
-#setup environment for geant4-v.11 and CRY example
+#setup environment for geant4
 
-export CRYHOME=/home/alexandra/Geant4/cry_v1.7
-export G4DIR=~/Geant4/geant4.v11.0.0-INSTALL/lib/Geant4-11.0.0
-
-source /home/alexandra/Geant4/geant4-v11.0.0-INSTALL/bin/geant4.sh
-
-source ${CRYHOME}/setup
+export G4DIR=~/Software/Geant4/geant4-v11.1.1-install/lib/Geant4-11.1.1
+source /home/alexandra/Software/Geant4/geant4-v11.1.1-install/bin/geant4.sh
 
 
 

@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # Setup the project
 cmake_minimum_required(VERSION 3.16...3.21)
-project(cosmicMuonsGeantEcoMug)
+project(muons4Peace)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -20,21 +20,11 @@ endif()
 find_package( Boost REQUIRED)
 include_directories( ${Boost_INCLUDE_DIR} )
 
-#----------------------------------------------------------------------------
 # Setup Geant4 include directories and compile definitions
 # Setup include directory for this project
 #
 include(${Geant4_USE_FILE})
 include_directories(${PROJECT_SOURCE_DIR}/include)
-
-# also include the CRY lib
-add_library(crylib STATIC IMPORTED)
-set(CRYHOME $ENV{CRYHOME})
-set_target_properties(crylib PROPERTIES
-IMPORTED_LOCATION "${CRYHOME}/lib/libCRY.a"
-INTERFACE_INCLUDE_DIRECTORIES "${CRYHOME}/src"
-)
-
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
@@ -47,7 +37,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 # Add the executable, and link it to the Geant4 and CRY libraries
 #
 add_executable(cosmicMuonsEcoMug cosmicMuonsEcoMug.cc ${sources} ${headers})
-target_link_libraries(cosmicMuonsEcoMug ${Geant4_LIBRARIES} crylib ${Boost_LIBRARIES})
+target_link_libraries(cosmicMuonsEcoMug ${Geant4_LIBRARIES} ${Boost_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory,

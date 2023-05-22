@@ -30,7 +30,6 @@
 #include "ActionInitialization.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "PrimaryGeneratorActionGun.hh"
-#include "PrimaryGeneratorActionCRY.hh"
 #include "RunAction.hh"
 #include "EventAction.hh"
 #include "SteppingAction.hh"
@@ -80,9 +79,6 @@ void ActionInitialization::Build() const
       SetUserAction(new PrimaryGeneratorAction());
       break;
     
-    case 3:
-      SetUserAction(new PrimaryGeneratorActionCRY(""));
-      break;
     default:
       std::cout << "---Problem with PrimaryGeneratorAction Choice!---" <<std::endl;
       break;

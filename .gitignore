@@ -1,4 +1,5 @@
 # ignore build dir
-build/
+muonsBunker-build/
 results/
-plots/
+# ignore this, because paths need to be adjusted to every environment
+geant4init.sh

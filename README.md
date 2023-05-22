@@ -5,19 +5,19 @@ The current setup allows to change certain parameters without recompiling the co
 
 
 ## Compiling and running the examples
-- in addition to the Geant4 prerequestits the boost library is required, which can be installed as  `$ sudo apt install libboost-all-dev`.
+- in addition to the Geant4 prerequesits the boost library is required, which can be installed as  `$ sudo apt install libboost-all-dev`.
 
 **Geant4**
   - requires Geant4 v11.0.0 (or similar new version)
   - follow install instructions on https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/installguide.html#buildandinstall
   - summary of install and run process with useful configuration for this repo can be found at `installG4`
 
-**EcoMug (Efficiant Cosmic Muon Generator for cosmic-ray muon applications)**
-  - https://www.sciencedirect.com/science/article/abs/pii/S0168900221007178
-  - easy to use with Geant4, as its a header only library
+**EcoMug**
   - aleady included in this repo (but github repo at https://github.com/dr4kan/EcoMug)
 
-## EcoMug
+## EcoMug`(Efficiant Cosmic Muon Generator for cosmic-ray muon applications)**
+- https://www.sciencedirect.com/science/article/abs/pii/S0168900221007178
+- header only lib, easy to use cosmic muon generator, developed sepcifically for muography applications
 - Options changeable by user
   - different generation geometries: flat sky(plane), half sphere, cylinder
   - minimum/maximum momentum
@@ -26,8 +26,8 @@ The current setup allows to change certain parameters without recompiling the co
       
 ## Analysis
   - analysis with root (https://root.cern/install/), using version 6.26/04
-  - can be installed via `$sudo snap install root-framework
-  
-`
+  - can be installed via `$sudo snap install root-framework`
+
+
     
   
