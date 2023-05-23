@@ -31,13 +31,11 @@
 #define ActionInitialization_h 1
 
 #include "G4VUserActionInitialization.hh"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
 
 /// Action initialization class.
 
 
-namespace cosmicMuonsEcoMug
+namespace muonsBunker
 {
 class DetectorConstruction;
 class ActionInitialization : public G4VUserActionInitialization

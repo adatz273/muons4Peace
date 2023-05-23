@@ -25,74 +25,54 @@
 //
 //
 /// \file ActionInitialization.cc
-/// \brief Implementation of the B1::ActionInitialization class
+/// \brief Implementation of the ActionInitialization class
 
 #include "ActionInitialization.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "PrimaryGeneratorActionGun.hh"
 #include "RunAction.hh"
-#include "EventAction.hh"
 #include "SteppingAction.hh"
 #include "FileManager.hh"
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-
-namespace pt = boost::property_tree;
-namespace cosmicMuonsEcoMug
+namespace muonsBunker
 {
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+  ActionInitialization::ActionInitialization(DetectorConstruction* det)
+  : fDetector(det)
+  {}
 
-ActionInitialization::ActionInitialization(DetectorConstruction* det) 
-: fDetector(det)
-{}
+  ActionInitialization::~ActionInitialization()
+  {}
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-ActionInitialization::~ActionInitialization()
-{}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void ActionInitialization::BuildForMaster() const
-{
-  RunAction* runAction = new RunAction();
-  SetUserAction(runAction);
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void ActionInitialization::Build() const
-{
-  FileManager& fileman = FileManager::GetFileManager();
-  pt::ptree ptree = fileman.GetPropTree();
-  G4int inputMethod = std::stoi(ptree.get<std::string>("input.method"));  // 1 - "Gun", 2 -"EcoMug", 3 -"CRY"
-
-  switch (inputMethod){
-    
-    case 1:
-      SetUserAction(new PrimaryGeneratorActionGun());
-      break;
-
-    case 2:
-      SetUserAction(new PrimaryGeneratorAction());
-      break;
-    
-    default:
-      std::cout << "---Problem with PrimaryGeneratorAction Choice!---" <<std::endl;
-      break;
+  void ActionInitialization::BuildForMaster() const
+  {
+    RunAction* runAction = new RunAction();
+    SetUserAction(runAction);
   }
 
-  RunAction* runAction = new RunAction();
-  SetUserAction(runAction);
+  void ActionInitialization::Build() const
+  {
+    FileManager& fileman = FileManager::GetFileManager();
+    pt::ptree ptree = fileman.GetPropTree();
+    G4int inputMethod = std::stoi(ptree.get<std::string>("input.method"));  // 1 - "Gun", 2 -"EcoMug", 3 -"CRY"
 
-  EventAction* eventAction = new EventAction(runAction);
-  SetUserAction(eventAction);
+    switch (inputMethod){
+      case 1:
+        SetUserAction(new PrimaryGeneratorActionGun());
+        break;
 
-  SetUserAction(new SteppingAction(eventAction, fDetector));
-}
+      case 2:
+        SetUserAction(new PrimaryGeneratorAction());
+        break;
+    
+      default:
+        std::cout << "---Problem with PrimaryGeneratorAction Choice!---" <<std::endl;
+        break;
+    }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+    RunAction* runAction = new RunAction();
+    SetUserAction(runAction);
+    SetUserAction(new SteppingAction(fDetector));
+  }
 
 }

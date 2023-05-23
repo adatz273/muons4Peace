@@ -15,28 +15,25 @@
 
 #include "G4AnalysisManager.hh"
 #include "EcoMug.h"
-#include "vector"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
 
 class G4Event;
-namespace pt = boost::property_tree;
 
-class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
-{
-  public:
-    PrimaryGeneratorAction();
-    ~PrimaryGeneratorAction();
-    
-  public:
-    void GeneratePrimaries(G4Event* anEvent);
-
-  private:
-    G4ParticleTable* fparticleTable;
-    G4ParticleGun* fparticleGun = nullptr;
-    EcoMug* fmuonGen;
-    G4ParticleDefinition* fparticleMu = nullptr;
-    G4ParticleDefinition* fparticleAntiMu = nullptr;
-};
-
+namespace muonsBunker{
+  class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
+  {
+    public:
+      PrimaryGeneratorAction();
+      ~PrimaryGeneratorAction();
+      
+    public:
+      void GeneratePrimaries(G4Event* anEvent);
+  
+    private:
+      G4ParticleTable* fparticleTable;
+      G4ParticleGun* fparticleGun = nullptr;
+      EcoMug* fmuonGen;
+      G4ParticleDefinition* fparticleMu = nullptr;
+      G4ParticleDefinition* fparticleAntiMu = nullptr;
+  };
+}
 #endif

@@ -25,7 +25,7 @@
 //
 //
 /// \file SteppingAction.hh
-/// \brief Definition of the B1::SteppingAction class
+/// \brief Definition of the SteppingAction class
 
 #ifndef SteppingAction_h
 #define SteppingAction_h 1
@@ -36,32 +36,25 @@
 
 class G4LogicalVolume;
 
-
-namespace cosmicMuonsEcoMug
+namespace muonsBunker
 {
-class EventAction;
-class DetectorConstruction;
+  class DetectorConstruction;
 
-class SteppingAction : public G4UserSteppingAction
-{
-  public:
-    SteppingAction(EventAction* eventAction, DetectorConstruction* det);
-    ~SteppingAction() override;
+  class SteppingAction : public G4UserSteppingAction
+  {
+    public:
+      SteppingAction(DetectorConstruction* det);
+      ~SteppingAction() override;
 
-    // method from the base class
-    void UserSteppingAction(const G4Step*) override;
+      // method from the base class
+      void UserSteppingAction(const G4Step*) override;
 
-  private:
-    EventAction* fEventAction = nullptr;
-    DetectorConstruction* fDetector = nullptr;
-    G4double fxExt;
-    G4double fyExt;
-    
-    //G4LogicalVolume* fScoringVolume = nullptr;
-};
+    private:
+      DetectorConstruction* fDetector = nullptr;
+      G4double fxExt;
+      G4double fyExt;
+  };
 
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif

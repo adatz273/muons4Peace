@@ -25,7 +25,7 @@
 //
 //
 /// \file PrimaryGeneratorActionGun.cc
-/// \brief Implementation of the B1::PrimaryGeneratorActionGun class
+/// \brief Implementation of the PrimaryGeneratorActionGun class
 
 #include "PrimaryGeneratorActionGun.hh"
 
@@ -40,61 +40,50 @@
 #include "Randomize.hh"
 #include "FileManager.hh"
 
-namespace cosmicMuonsEcoMug
+namespace muonsBunker
 {
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-PrimaryGeneratorActionGun::PrimaryGeneratorActionGun()
-{
-  G4int n_particle = 1;
-  fParticleGun  = new G4ParticleGun(n_particle);
-
-  FileManager& fileman = FileManager::GetFileManager();
-  pt::ptree ptree = fileman.GetPropTree();
-  //--------EcoMug--------------- 
-  //fmuonGen->SetSeed(1234); // for reproduceability
-  //read the following from file to enable flexibility;
-
-  G4double px = std::stod(ptree.get<std::string>("gun.px"));
-  G4double py = std::stod(ptree.get<std::string>("gun.py"));
-  G4double pz = std::stod(ptree.get<std::string>("gun.pz"));
-
-
-  // default particle kinematic
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4String particleName;
-  G4ParticleDefinition* particle
-    = particleTable->FindParticle(particleName="mu-");
-  fParticleGun->SetParticleDefinition(particle);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz));
-  fParticleGun->SetParticleEnergy(4.*GeV);
+  
+  PrimaryGeneratorActionGun::PrimaryGeneratorActionGun()
+  {
+    G4int n_particle = 1;
+    fParticleGun  = new G4ParticleGun(n_particle);
+  
+    FileManager& fileman = FileManager::GetFileManager();
+    pt::ptree ptree = fileman.GetPropTree();
+     
+    G4double px = std::stod(ptree.get<std::string>("gun.px"));
+    G4double py = std::stod(ptree.get<std::string>("gun.py"));
+    G4double pz = std::stod(ptree.get<std::string>("gun.pz"));
+  
+    // default particle kinematic
+    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+    G4String particleName;
+    G4ParticleDefinition* particle
+      = particleTable->FindParticle(particleName="mu-");
+    fParticleGun->SetParticleDefinition(particle);
+    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz));
+    fParticleGun->SetParticleEnergy(4.*GeV);
+  }
+   
+  PrimaryGeneratorActionGun::~PrimaryGeneratorActionGun()
+  {
+    delete fParticleGun;
+  }
+    
+  void PrimaryGeneratorActionGun::GeneratePrimaries(G4Event* anEvent)
+  {
+    FileManager& fileman = FileManager::GetFileManager();
+    pt::ptree ptree = fileman.GetPropTree();
+  
+    G4double x0 = std::stod(ptree.get<std::string>("gun.x"))*m;
+    G4double y0 = std::stod(ptree.get<std::string>("gun.y"))*m;
+    G4double z0 = std::stod(ptree.get<std::string>("gun.z"))*m;
+  
+    fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
+    fParticleGun->GeneratePrimaryVertex(anEvent);
+  }
+  
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-PrimaryGeneratorActionGun::~PrimaryGeneratorActionGun()
-{
-  delete fParticleGun;
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void PrimaryGeneratorActionGun::GeneratePrimaries(G4Event* anEvent)
-{
-  FileManager& fileman = FileManager::GetFileManager();
-  pt::ptree ptree = fileman.GetPropTree();
-
-  G4double x0 = std::stod(ptree.get<std::string>("gun.x"))*m;
-  G4double y0 = std::stod(ptree.get<std::string>("gun.y"))*m;
-  G4double z0 = std::stod(ptree.get<std::string>("gun.z"))*m;
-
-  fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
-  fParticleGun->GeneratePrimaryVertex(anEvent);
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-}
-
-
+  
+  
+  

@@ -15,7 +15,7 @@ The current setup allows to change certain parameters without recompiling the co
 **EcoMug**
   - aleady included in this repo (but github repo at https://github.com/dr4kan/EcoMug)
 
-## EcoMug`(Efficiant Cosmic Muon Generator for cosmic-ray muon applications)**
+## EcoMug (Efficiant Cosmic Muon Generator for cosmic-ray muon applications)
 - https://www.sciencedirect.com/science/article/abs/pii/S0168900221007178
 - header only lib, easy to use cosmic muon generator, developed sepcifically for muography applications
 - Options changeable by user

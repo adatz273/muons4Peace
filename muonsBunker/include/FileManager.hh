@@ -3,6 +3,8 @@
 
 #include <boost/property_tree/ptree.hpp>
 
+// this class uses the boost library (the boost::property_tree) to easily write and read information from an .ini file
+
 namespace pt = boost::property_tree;
 
 // use Meyers singleton as this is threadsafe
@@ -28,15 +30,10 @@ private:
   FileManager& operator=(const FileManager&) = delete; 
 
   pt::ptree fptree;
-
 };
 
 template <typename T>
 void FileManager::AddValuePropTree(const std::string& key,const T& val){
   fptree.put(key, val);  
 }
-
-
-
-
 #endif

@@ -16,7 +16,7 @@ void FileManager::ReadIniFile(std::string filename) {
 }
 
 void FileManager::CreateResultsDir(){
-  // create dir to store results
+  // create directory to store results
   std::string name = fptree.get<std::string>("output.foldername");
   std::string path = fptree.get<std::string>("output.pathname");
   std::string pathname = path+name;
@@ -27,7 +27,6 @@ void FileManager::CreateResultsDir(){
   else
     std::cout << "Results are stored at "<< pathname << std::endl;
 }
-
 
 
 void FileManager::WriteIniFile(std::string filename) {

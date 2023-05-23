@@ -25,7 +25,7 @@
 //
 //
 /// \file PrimaryGeneratorActionGun.hh
-/// \brief Definition of the B1::PrimaryGeneratorActionGun class
+/// \brief Definition of the PrimaryGeneratorActionGun class
 
 #ifndef PrimaryGeneratorActionGun_h
 #define PrimaryGeneratorActionGun_h 1
@@ -39,31 +39,26 @@ class G4Event;
 class G4Box;
 
 /// The primary generator action class with particle gun.
-///
-/// The default kinematic is a 6 MeV gamma, randomly distribued
-/// in front of the phantom across 80% of the (X,Y) phantom size.
 
-namespace cosmicMuonsEcoMug
+namespace muonsBunker
 {
+  class PrimaryGeneratorActionGun : public G4VUserPrimaryGeneratorAction
+  {
+    public:
+      PrimaryGeneratorActionGun();
+      ~PrimaryGeneratorActionGun() override;
 
-class PrimaryGeneratorActionGun : public G4VUserPrimaryGeneratorAction
-{
-  public:
-    PrimaryGeneratorActionGun();
-    ~PrimaryGeneratorActionGun() override;
+      // method from the base class
+      void GeneratePrimaries(G4Event*) override;
 
-    // method from the base class
-    void GeneratePrimaries(G4Event*) override;
+      // method to access particle gun
+      const G4ParticleGun* GetParticleGun() const { return fParticleGun; }
 
-    // method to access particle gun
-    const G4ParticleGun* GetParticleGun() const { return fParticleGun; }
+    private:
+      G4ParticleGun* fParticleGun = nullptr; // pointer a to G4 gun class
+      G4Box* fEnvelopeBox = nullptr;
 
-  private:
-    G4ParticleGun* fParticleGun = nullptr; // pointer a to G4 gun class
-    G4Box* fEnvelopeBox = nullptr;
-
-};
-
+  };
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

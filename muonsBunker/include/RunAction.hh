@@ -25,7 +25,7 @@
 //
 //
 /// \file RunAction.hh
-/// \brief Definition of the B1::RunAction class
+/// \brief Definition of the RunAction class
 
 #ifndef RunAction_h
 #define RunAction_h 1
@@ -35,29 +35,20 @@
 #include "globals.hh"
 #include "G4AnalysisManager.hh"
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-
 class G4Run;
-namespace pt = boost::property_tree;
-/// Run action class
-///
-/// In EndOfRunAction(), it calculates the dose in the selected volume
-/// from the energy deposit accumulated via stepping and event actions.
-/// The computed dose is then printed on the screen.
 
-namespace cosmicMuonsEcoMug
+namespace muonsBunker
 {
 
-class RunAction : public G4UserRunAction
-{
-  public:
-    RunAction();
-    ~RunAction() override;
+  class RunAction : public G4UserRunAction
+  {
+    public:
+      RunAction();
+      ~RunAction() override;
 
-    void BeginOfRunAction(const G4Run*) override;
-    void   EndOfRunAction(const G4Run*) override;
-};
+      void BeginOfRunAction(const G4Run*) override;
+      void   EndOfRunAction(const G4Run*) override;
+  };
 
 }
 
