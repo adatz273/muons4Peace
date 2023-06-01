@@ -2,6 +2,7 @@
 
 This code is based on example B1 from Geant4. It examines how atmospheric muons can be used as an imaging tool (muography) for a bunker. In particular, it investigates the feasibility of this technique to find small quantitites of fissile material within the bunker. For the muon generation `EcoMug` is used. The code can be executed multithreaded, if Geant4 is compiled such that it supports multithreading.
 The current setup allows to change certain parameters without recompiling the code, this can be done in `inputMuons.ini` and `simpleRun.mac`. The data is stored as `.root` files, additonally the parameters as set in `inputMuons.ini` will be stored for each run in `parameters.ini`.
+Note that the code is also available as docker image on https://hub.docker.com/repository/docker/ad732/muons4peace-img/general.
 
 
 ## Compiling and running the code
